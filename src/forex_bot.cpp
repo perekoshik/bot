@@ -1,7 +1,8 @@
 #include <iostream>
 #include <curl/curl.h>
 #include <string>
-#include <chrono>  // Для замера времени
+#include <chrono>
+#include <thread>
 
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s) {
     s->append((char*)contents, size * nmemb);
@@ -13,8 +14,6 @@ void getPrice() {
     CURLcode res;
     std::string readBuffer;
 
-    auto start = std::chrono::high_resolution_clock::now(); // Старт замера времени
-
     curl = curl_easy_init();
     if (curl) {
         curl_easy_setopt(curl, CURLOPT_URL, "https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT");
@@ -23,15 +22,21 @@ void getPrice() {
         res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
 
-        auto end = std::chrono::high_resolution_clock::now(); // Конец замера времени
-        std::chrono::duration<double> duration = end - start;
-
         std::cout << "Price data: " << readBuffer << std::endl;
-        std::cout << "Execution time: " << duration.count() << " seconds" << std::endl;
     }
 }
 
 int main() {
-    getPrice();
+    auto start = std::chrono::high_resolution_clock::now();
+
+    for (int i = 0; i < 10; ++i) {
+        getPrice();
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+
+    std::cout << "Total execution time: " << duration.count() << " seconds" << std::endl;
     return 0;
 }
