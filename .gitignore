@@ -1,5 +1,7 @@
 # VSCode
 .vscode/*
+!c_cpp_properties.json
+!tasks.json
 !.c_cpp_properties.json
 !.tasks.json
 !.vscode/settings.json
