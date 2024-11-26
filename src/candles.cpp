@@ -1,4 +1,4 @@
-#include <candles.h>
+#include "candles.h"
 #include <vector>
 #include <jsoncpp/json/json.h>
 #include <iostream>
@@ -17,7 +17,7 @@ std::vector<Candle> parseCandles(const std::string& jsonData, const std::string&
             return candles;
         }
 
-        for (int i = std::max(0, numCandles - 50); i < numCandles; ++i) {
+        for (int i = std::max(0, numCandles - 252); i < numCandles; ++i) {
             const Json::Value& candle = ohlc[i];
 
             Candle c;

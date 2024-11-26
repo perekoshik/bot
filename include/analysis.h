@@ -4,6 +4,8 @@
 #include "candles.h"
 #include <string>
 
-void analyzeCoin(const std::string& pair, const std::vector<Candle>& candles, const std::string& token, const std::string& chat_id);
+void analyzeCoin(const std::string& pair, const std::string& token, const std::string& chat_id);
+
+void getIndicators();
 
 #endif

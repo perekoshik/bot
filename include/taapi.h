@@ -1,0 +1,8 @@
+#ifndef TAAPI_H
+#define TAAPI_H
+
+#include <string>
+
+std::string api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHVlIjoiNjVlMjRhYjkyYzczYzFlM2ZkYTU5M2YyIiwiaWF0IjoxNzMyMjc2ODQxLCJleHAiOjMzMjM2NzQwODQxfQ.G_YJFM2P7T_SAsDtGCA9_UmoxnjrHYAtJqzCwt6wYNA";
+
+#endif

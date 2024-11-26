@@ -13,6 +13,23 @@ double calculateRMA(const std::vector<Candle>& candles, int period) {
     return rma;
 }
 
+double calculateEMA(const std::vector<Candle>& candles, int period) {
+    if (candles.empty() || period <= 0) return 0.0;
+
+    double multiplier = 2.0 / (period + 1);
+    double ema = std::stod(candles[0].close);
+
+    for (size_t i = 1; i < candles.size(); ++i) {
+        double closePrice = std::stod(candles[i].close);
+        ema = closePrice * multiplier + ema * (1 - multiplier);
+    }
+
+    return ema;
+}
+
+
+
+
 double calculateRSI(const std::vector<Candle>& candles, int period) {
     if (candles.size() < static_cast<size_t>(period + 1)) {
         throw std::runtime_error("Not enough data to calculate RSI!");
@@ -88,3 +105,4 @@ double calculateStochasticOscillator(const std::vector<Candle>& candles, int per
 
     return ((currentClose - lowestLow) / (highestHigh - lowestLow)) * 100;
 }
+
